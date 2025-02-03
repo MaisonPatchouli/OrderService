@@ -1,7 +1,7 @@
-package org.example.orderservice.product;
+package org.example.orderservice.service;
 
-import org.example.orderservice.db.ProductRepository;
-import org.example.orderservice.db.entity.ProductEntity;
+import org.example.orderservice.repository.ProductRepository;
+import org.example.orderservice.entity.ProductEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

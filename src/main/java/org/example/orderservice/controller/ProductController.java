@@ -1,6 +1,7 @@
-package org.example.orderservice.product;
+package org.example.orderservice.controller;
 
-import org.example.orderservice.db.entity.ProductEntity;
+import org.example.orderservice.entity.ProductEntity;
+import org.example.orderservice.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

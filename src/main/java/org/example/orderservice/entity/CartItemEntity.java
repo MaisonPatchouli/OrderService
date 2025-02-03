@@ -1,32 +1,41 @@
-package org.example.orderservice.db.entity;
+package org.example.orderservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cart_items")
-public record CartItemEntity(
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CartItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id,
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
-    CartEntity cart,
+    private CartEntity cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    ProductEntity product,
+    private ProductEntity product;
 
     @Column(nullable = false)
-    Integer quantity,
+    private Integer quantity;
 
     @Column(name = "created_at")
-    LocalDateTime createdAt
-) {
-    public CartItemEntity {
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
         }
     }
-} 
+}

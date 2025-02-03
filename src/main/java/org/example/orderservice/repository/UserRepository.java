@@ -1,6 +1,6 @@
-package org.example.orderservice.db;
+package org.example.orderservice.repository;
 
-import org.example.orderservice.db.entity.UserEntity;
+import org.example.orderservice.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

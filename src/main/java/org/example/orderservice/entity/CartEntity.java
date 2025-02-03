@@ -1,31 +1,40 @@
-package org.example.orderservice.db.entity;
+package org.example.orderservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "carts")
-public record CartEntity(
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id,
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    UserEntity user,
+    private UserEntity user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    List<CartItemEntity> items,
+    private List<CartItemEntity> items = new ArrayList<>();
 
     @Column(name = "created_at")
-    LocalDateTime createdAt
-) {
-    public CartEntity {
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
         }
-        items = items == null ? new ArrayList<>() : new ArrayList<>(items);
     }
-} 
+}
